@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test easingFunctions</title>
+    <style>
+      .section {
+        height: 30vh;
+        margin: 0 0 1em;
+        border: 1px solid gray;
+      }
+
+      select {
+        margin: 0 0 1em;
+      }
+
+      .up, .down {
+        position: fixed;
+        right: 32px;
+      }
+
+      .down {
+        top: 12px;
+      }
+
+      .up {
+        bottom: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="up"></div>
+      <select v-model="selected" id="select">
+        <option disabled value="">{{ message }}</option>
+        <template v-for="ease in easingNames">
+          <option>{{ ease }}</option>
+        </template>
+      </select>
+      <div class="section" v-for="n in 100">
+        <div v-text="n"></div>
+      </div>
+      <button class="down" @click="onClick('down')" >Scroll Down</button>
+      <button class="up" @click="onClick('up')">Scroll Up</button>
+      <div id="down"></div>
+    </div>
+
+    <script src="js/vue.min.js"></script>
+    <script src="js/moveTo.min.js"></script>
+    <script src="../dist/easingFunctions.js"></script>
+    <script>
+    new Vue({
+      el: '#app',
+      data: {
+        $target: null,
+        moveTo: null,
+        selected: '',
+        message: 'Please selected easing',
+        easingNames: Object.keys(window.easingFunctions),
+      },
+      methods: {
+        onClick(target) {
+          if (!this.selected) {
+            document.getElementById('select').focus()
+            return alert(this.message)
+          }
+
+          this.moveTo = this.createMoveTo()
+          this.moveTo.move(this.getTarget(target))
+          return
+        },
+
+        createMoveTo() {
+          return new MoveTo({
+            duration: 800,
+            easing: this.selected
+          }, window.easingFunctions)
+        },
+
+        getTarget(direction) {
+          if (direction === 'down') {
+            return document.getElementById('down')
+          } else {
+            return document.getElementById('up')
+          }
+        },
+      },
+      created() {
+        console.log('These are some easing functions:')
+        this.easingNames.forEach((name) => {
+          console.log(`- ${name}`)
+        })
+      }
+    })
+    </script>
+  </body>
+</html>
