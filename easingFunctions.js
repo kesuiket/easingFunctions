@@ -82,35 +82,35 @@ export function easeInSine(t, b, c, d) {
   return -c * Math.cos(t / d * (Math.PI / 2)) + c + b
 }
 
-export function aseOutSine(t, b, c, d) {
+export function easeOutSine(t, b, c, d) {
   return c * Math.sin(t / d * (Math.PI / 2)) + b
 }
 
-export function aseInOutSine(t, b, c, d) {
+export function easeInOutSine(t, b, c, d) {
   return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b
 }
 
-export function aseInExpo(t, b, c, d) {
+export function easeInExpo(t, b, c, d) {
   return c * Math.pow(2, 10 * (t / d - 1)) + b
 }
 
-export function aseOutExpo(t, b, c, d) {
+export function easeOutExpo(t, b, c, d) {
   return c * (-Math.pow(2, -10 * t / d) + 1) + b
 }
 
-export function aseInOutExpo(t, b, c, d) {
+export function easeInOutExpo(t, b, c, d) {
   t /= d / 2
   if (t < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b
   t--
   return c / 2 * (-Math.pow( 2, -10 * t) + 2) + b
 }
 
-export function aseInCirc(t, b, c, d) {
+export function easeInCirc(t, b, c, d) {
   t /= d
   return -c * (Math.sqrt(1 - t * t) - 1) + b
 }
 
-export function aseOutCirc(t, b, c, d) {
+export function easeOutCirc(t, b, c, d) {
   t /= d
   t--
   return c * Math.sqrt(1 - t * t) + b
