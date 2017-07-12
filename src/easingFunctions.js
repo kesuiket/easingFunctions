@@ -1,9 +1,12 @@
 /**
- * Easing functions:
- * @see http://gizma.com/easing/
+ * General parameters:
+ * @param {Float} t current time
+ * @param {Float} b start value
+ * @param {Float} c change in value
+ * @param {Float} d duration
  */
 
-export function linearTween(t, b, c, d) {
+export function linear(t, b, c, d) {
   return c * t / d + b
 }
 
